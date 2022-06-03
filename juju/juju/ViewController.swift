@@ -12,7 +12,7 @@ import ARKit
 class ViewController: UIViewController, ARSCNViewDelegate {
 
     @IBOutlet var sceneView: ARSCNView!
-    @IBOutlet weak var labelView: UIView!
+    @IBOutlet weak var labelView: UILabel!
     @IBOutlet weak var faceLabel: UILabel!
     
 //    var analysis = ""
