@@ -6,3 +6,16 @@
 //
 
 import Foundation
+import UIKit
+
+class HowToViewController: UIViewController {
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+    
+        
+        
+    }
+    
+}
+
