@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BV1-FR-VrT">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Dyg-vO-LXO">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
@@ -13,11 +13,11 @@
             <objects>
                 <viewController id="BV1-FR-VrT" customClass="ViewController" customModule="juju" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="U0K-SW-4ec">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <arscnView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BrB-h1-WRS">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="862"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                             </arscnView>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="k3k-cu-gf2" userLabel="labelView">
                                 <rect key="frame" x="87" y="698" width="240" height="128"/>
@@ -33,6 +33,18 @@
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ixd-Xe-VFs" userLabel="backButton">
+                                <rect key="frame" x="20" y="44" width="67" height="31"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Button"/>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mMP-jF-EjC" userLabel="HowToButton">
+                                <rect key="frame" x="327" y="44" width="67" height="31"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Button"/>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="fQZ-KI-GVf"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -43,6 +55,7 @@
                             <constraint firstItem="BrB-h1-WRS" firstAttribute="top" secondItem="U0K-SW-4ec" secondAttribute="top" id="rJc-2c-zQA"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="fNp-dp-CxP"/>
                     <connections>
                         <outlet property="faceLabel" destination="k3k-cu-gf2" id="hml-9P-dgh"/>
                         <outlet property="labelView" destination="aYz-YJ-B2s" id="GR0-P2-4gO"/>
@@ -53,25 +66,95 @@
             </objects>
             <point key="canvasLocation" x="139" y="135"/>
         </scene>
-        <!--View Controller-->
+        <!--Home View Controller-->
         <scene sceneID="ibS-R8-exL">
             <objects>
-                <viewController id="Dyg-vO-LXO" sceneMemberID="viewController">
+                <viewController id="Dyg-vO-LXO" customClass="HomeViewController" customModule="juju" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="mGe-z2-T7l">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="emotions" translatesAutoresizingMaskIntoConstraints="NO" id="z0U-WP-gIl" userLabel="EmotionsImageView">
+                                <rect key="frame" x="44" y="196" width="350" height="192"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="192" id="Qrh-hJ-j5E"/>
+                                </constraints>
+                            </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" image="kid" translatesAutoresizingMaskIntoConstraints="NO" id="BD4-Yk-w9f" userLabel="KidImageView">
+                                <rect key="frame" x="96" y="638" width="222" height="182"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pxt-hT-LaO">
+                                <rect key="frame" x="78" y="355" width="270" height="80"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" image="startButton" buttonSize="small"/>
+                                <connections>
+                                    <segue destination="BV1-FR-VrT" kind="show" id="byr-R5-AmM"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jft-6q-qsJ" userLabel="HowToButton">
+                                <rect key="frame" x="78" y="483" width="270" height="83"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" image="howButton"/>
+                                <connections>
+                                    <segue destination="4Rg-gQ-2We" kind="show" id="7ip-WO-dmr"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="bX8-m1-CYJ"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" systemColor="systemYellowColor"/>
+                        <constraints>
+                            <constraint firstItem="Jft-6q-qsJ" firstAttribute="leading" secondItem="bX8-m1-CYJ" secondAttribute="leading" constant="78" id="4Bp-yx-c5r"/>
+                            <constraint firstItem="Jft-6q-qsJ" firstAttribute="top" secondItem="Pxt-hT-LaO" secondAttribute="bottom" constant="48" id="4cL-1u-pU3"/>
+                            <constraint firstItem="BD4-Yk-w9f" firstAttribute="leading" secondItem="bX8-m1-CYJ" secondAttribute="leading" constant="96" id="9Ls-rf-Lze"/>
+                            <constraint firstItem="z0U-WP-gIl" firstAttribute="leading" secondItem="bX8-m1-CYJ" secondAttribute="leading" constant="44" id="Eev-Yl-FEA"/>
+                            <constraint firstItem="BD4-Yk-w9f" firstAttribute="top" secondItem="Jft-6q-qsJ" secondAttribute="bottom" constant="72" id="NLO-Kr-4FB"/>
+                            <constraint firstItem="Pxt-hT-LaO" firstAttribute="leading" secondItem="bX8-m1-CYJ" secondAttribute="leading" constant="78" id="Re0-w0-Gte"/>
+                            <constraint firstItem="bX8-m1-CYJ" firstAttribute="trailing" secondItem="Pxt-hT-LaO" secondAttribute="trailing" constant="66" id="dli-Ch-uac"/>
+                            <constraint firstItem="z0U-WP-gIl" firstAttribute="top" secondItem="bX8-m1-CYJ" secondAttribute="top" constant="152" id="f4h-kR-TED"/>
+                            <constraint firstItem="bX8-m1-CYJ" firstAttribute="trailing" secondItem="z0U-WP-gIl" secondAttribute="trailing" constant="20" id="fmU-eZ-y9q"/>
+                            <constraint firstItem="Pxt-hT-LaO" firstAttribute="top" secondItem="z0U-WP-gIl" secondAttribute="bottom" constant="-33" id="k1l-4b-o4m"/>
+                            <constraint firstItem="bX8-m1-CYJ" firstAttribute="trailing" secondItem="Jft-6q-qsJ" secondAttribute="trailing" constant="66" id="mNY-rU-4wL"/>
+                            <constraint firstItem="bX8-m1-CYJ" firstAttribute="trailing" secondItem="BD4-Yk-w9f" secondAttribute="trailing" constant="96" id="rtH-jG-fyT"/>
+                            <constraint firstItem="bX8-m1-CYJ" firstAttribute="bottom" secondItem="BD4-Yk-w9f" secondAttribute="bottom" constant="42" id="sgS-Rz-NAA"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="KidImageView" destination="BD4-Yk-w9f" id="6ta-Yc-S7N"/>
+                        <outlet property="emotionImageView" destination="z0U-WP-gIl" id="Luq-ex-m0N"/>
+                        <outlet property="howToButton" destination="Jft-6q-qsJ" id="BT9-hk-MmA"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lAR-J1-d5e" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1033" y="135"/>
+            <point key="canvasLocation" x="1031.8840579710145" y="134.59821428571428"/>
+        </scene>
+        <!--How To View Controller-->
+        <scene sceneID="Prq-x5-wg9">
+            <objects>
+                <viewController id="4Rg-gQ-2We" customClass="HowToViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="i0c-bZ-F8B">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="org-5O-K3L"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="ctI-5l-D59"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="DmR-2u-7FD" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1808.6956521739132" y="134.59821428571428"/>
         </scene>
     </scenes>
     <resources>
+        <image name="emotions" width="706" height="479"/>
+        <image name="howButton" width="261" height="69"/>
+        <image name="kid" width="378" height="314"/>
+        <image name="startButton" width="261" height="70"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemYellowColor">
+            <color red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
