@@ -12,10 +12,16 @@ import ARKit
 class ViewController: UIViewController, ARSCNViewDelegate {
 
     @IBOutlet var sceneView: ARSCNView!
-    @IBOutlet weak var labelView: UILabel!
-    @IBOutlet weak var faceLabel: UILabel!
     
-//    var analysis = ""
+    @IBOutlet weak var labelView: UILabel!
+    
+    @IBOutlet weak var faceLabel: UILabel!
+    @IBOutlet weak var faceLabel2: UILabel!
+   
+    @IBOutlet weak var homeButton: UIButton!
+    @IBOutlet weak var howtoButton: UIButton!
+    
+    @IBOutlet weak var emotionLabel: UIView!
     
     override func viewDidLoad() {
         super.viewDidLoad()

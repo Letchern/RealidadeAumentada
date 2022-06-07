@@ -17,14 +17,18 @@ class HomeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
-        howToButton?.setTitle("", for: .normal)
-        
-        let buttonHow = UIImage(named: "howbutton")
-        howToButton?.setImage(buttonHow?.withRenderingMode(.alwaysOriginal), for: .normal)
-        
-        
     }
     
+ 
+    @IBAction func StartGame(_ sender: Any) {
+        if let vc = storyboard?.instantiateViewController(withIdentifier: "startGame") as? ViewController {
+            self.present(vc, animated: true, completion: nil)
+        }
+    }
+    
+    @IBAction func HowToPlayGame(_ sender: Any) {
+        if let vc = storyboard?.instantiateViewController(withIdentifier: "howToView") as? HowToViewController {
+            self.present(vc, animated: true, completion: nil)
+        }
+    }
 }
