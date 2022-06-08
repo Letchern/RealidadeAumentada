@@ -19,7 +19,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     @IBOutlet weak var faceLabel2: UILabel!
    
     @IBOutlet weak var homeButton: UIButton!
-    @IBOutlet weak var howtoButton: UIButton!
+   
     
     @IBOutlet weak var emotionLabel: UIView!
     

@@ -165,7 +165,7 @@
         <!--Home View Controller-->
         <scene sceneID="ibS-R8-exL">
             <objects>
-                <viewController id="Dyg-vO-LXO" customClass="HomeViewController" customModule="juju" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="homeV" id="Dyg-vO-LXO" customClass="HomeViewController" customModule="juju" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="mGe-z2-T7l">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
