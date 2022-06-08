@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		142FF963284AA80D006A1AA7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142FF962284AA80D006A1AA7 /* AppDelegate.swift */; };
-		142FF965284AA80D006A1AA7 /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 142FF964284AA80D006A1AA7 /* art.scnassets */; };
 		142FF967284AA80D006A1AA7 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142FF966284AA80D006A1AA7 /* ViewController.swift */; };
 		142FF96A284AA80D006A1AA7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 142FF968284AA80D006A1AA7 /* Main.storyboard */; };
 		142FF96C284AA80E006A1AA7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 142FF96B284AA80E006A1AA7 /* Assets.xcassets */; };
@@ -20,7 +19,6 @@
 /* Begin PBXFileReference section */
 		142FF95F284AA80D006A1AA7 /* juju.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = juju.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		142FF962284AA80D006A1AA7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		142FF964284AA80D006A1AA7 /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = art.scnassets; sourceTree = "<group>"; };
 		142FF966284AA80D006A1AA7 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		142FF969284AA80D006A1AA7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		142FF96B284AA80E006A1AA7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -60,7 +58,6 @@
 			isa = PBXGroup;
 			children = (
 				142FF962284AA80D006A1AA7 /* AppDelegate.swift */,
-				142FF964284AA80D006A1AA7 /* art.scnassets */,
 				142FF966284AA80D006A1AA7 /* ViewController.swift */,
 				142FF968284AA80D006A1AA7 /* Main.storyboard */,
 				142FF96B284AA80E006A1AA7 /* Assets.xcassets */,
@@ -129,7 +126,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				142FF965284AA80D006A1AA7 /* art.scnassets in Resources */,
 				142FF96F284AA80E006A1AA7 /* LaunchScreen.storyboard in Resources */,
 				142FF96C284AA80E006A1AA7 /* Assets.xcassets in Resources */,
 				142FF96A284AA80D006A1AA7 /* Main.storyboard in Resources */,
