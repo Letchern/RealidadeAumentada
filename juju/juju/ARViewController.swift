@@ -1,32 +1,23 @@
 //
-//  ViewController.swift
+//  ARViewController.swift
 //  juju
 //
-//  Created by Juliana Santana on 03/06/22.
+//  Created by Juliana Santana on 08/06/22.
 //
 
+import Foundation
 import UIKit
 import SceneKit
 import ARKit
 
-class ViewController: UIViewController, ARSCNViewDelegate {
 
-    @IBOutlet var sceneView: ARSCNView!
-    
-    @IBOutlet weak var labelView: UILabel!
-    
-    @IBOutlet weak var faceLabel: UILabel!
-    @IBOutlet weak var faceLabel2: UILabel!
-   
-    @IBOutlet weak var homeButton: UIButton!
-   
-    
-    @IBOutlet weak var emotionLabel: UIView!
-    
+class ARViewController: UIViewController, ARSCNViewDelegate {
+    @IBOutlet weak var sceneView: ARSCNView!
+  
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        labelView.layer.cornerRadius = 10
+       // labelView.layer.cornerRadius = 10
         
         sceneView.delegate = self
         
@@ -91,7 +82,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
             
             expression(anchor: faceAnchor)
             DispatchQueue.main.async {
-                self.faceLabel.text = self.analysis
+        //        self.faceLabel.text = self.analysis
             }
         }
     }
@@ -153,12 +144,8 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     }
     
     
-    
-    
-    
-    
-    
-    
+    // MARK: - Botão de Pause
+
     
     
     

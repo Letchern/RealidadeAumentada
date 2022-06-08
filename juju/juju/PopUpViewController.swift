@@ -8,13 +8,13 @@
 import Foundation
 import UIKit
 
-class PopUpViewController: UIViewController {
-    let pauseButton = UIButton(type: .system)
-    let resumeButton = UIButton(type: .system)
-    let homeButton = UIButton(type: .system)
-    let pauseView = UIView(frame: .zero)
+public class PopUpViewController: UIViewController {
+  public  let pauseButton = UIButton(type: .system)
+  public  let resumeButton = UIButton(type: .system)
+  public  let homeButton = UIButton(type: .system)
+  public let pauseView = UIView(frame: .zero)
     
-    override func viewDidLoad() {
+    public override func viewDidLoad() {
         super.viewDidLoad()
         
         // view.backgroundColor = UIColor.yellow
@@ -54,6 +54,7 @@ class PopUpViewController: UIViewController {
         createView()
         pauseButton.isEnabled = false
     }
+    
     
     
     

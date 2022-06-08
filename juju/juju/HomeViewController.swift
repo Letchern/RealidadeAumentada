@@ -21,7 +21,7 @@ class HomeViewController: UIViewController {
     
  
     @IBAction func StartGame(_ sender: Any) {
-        if let vc = storyboard?.instantiateViewController(withIdentifier: "startGame") as? ViewController {
+        if let vc = storyboard?.instantiateViewController(withIdentifier: "startGame1") as? ARViewController {
             self.present(vc, animated: true, completion: nil)
         }
     }
