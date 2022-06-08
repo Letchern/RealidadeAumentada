@@ -85,6 +85,10 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="faceLabel" destination="lmk-HY-Z0p" id="BNq-cB-HZu"/>
+                        <outlet property="jujuEmot" destination="sST-xj-X6V" id="CKT-go-2ft"/>
+                        <outlet property="labelEmocao" destination="CBQ-6a-1By" id="8ip-l5-Zai"/>
+                        <outlet property="palavraEmocao" destination="Ab2-8y-t9Y" id="ml6-tl-nJ5"/>
                         <outlet property="sceneView" destination="rby-DD-dNQ" id="wfi-5O-vS4"/>
                     </connections>
                 </viewController>

@@ -13,8 +13,13 @@ import ARKit
 
 class ARViewController: UIViewController, ARSCNViewDelegate {
     @IBOutlet weak var sceneView: ARSCNView!
-    
-    
+    @IBOutlet weak var palavraEmocao: UILabel!
+    @IBOutlet weak var labelEmocao: UILabel!
+    @IBOutlet weak var jujuEmot: UIImageView!
+    @IBOutlet weak var faceLabel: UILabel!
+    var emocao: String = "Alegria"
+    var count: Int = 0
+    var emocoes: [String] = ["Alegria", "Raiva", "Tristeza"]
     
     // MARK: - Botão de Pause Declarando
     let pauseButton = UIButton(type: .system)
@@ -56,7 +61,7 @@ class ARViewController: UIViewController, ARSCNViewDelegate {
         pauseButton.addTarget(self, action: #selector(pauseGame), for: .touchUpInside)
         // MARK: - Botão de Pause adicionado na View
         
-        
+        jujuEmot.image = UIImage(named: "\(emocoes[count]).png")
         sceneView.delegate = self
         
         guard ARFaceTrackingConfiguration.isSupported else {
@@ -73,13 +78,6 @@ class ARViewController: UIViewController, ARSCNViewDelegate {
         // Run the view's session
         sceneView.session.run(configuration)
     }
-    
-    
-    
-    
-    
-    
-    
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
@@ -102,77 +100,123 @@ class ARViewController: UIViewController, ARSCNViewDelegate {
             fatalError("No device found")
         }
     }
-    
-    
-    
     var analysis = ""
     
     func renderer(_ renderer: SCNSceneRenderer, didUpdate node: SCNNode, for anchor: ARAnchor) {
         if let faceAnchor = anchor as? ARFaceAnchor, let faceGeometry = node.geometry as? ARSCNFaceGeometry {
             faceGeometry.update(from: faceAnchor.geometry)
             
-            expression(anchor: faceAnchor)
+          
             DispatchQueue.main.async {
-        //        self.faceLabel.text = self.analysis
+                self.faceLabel.text = self.analysis
+                self.expression(anchor: faceAnchor)
             }
         }
     }
-    
-   // let possibles: ARFaceAnchor.BlendShapeLocation = []
     
     func expression(anchor: ARFaceAnchor) {
-        
-        let cheekPuff = anchor.blendShapes[.cheekPuff]
-        
-        let tongue = anchor.blendShapes[.tongueOut]
-        
-        let smileLeft = anchor.blendShapes[.mouthSmileLeft]
-        let smileRight = anchor.blendShapes[.mouthSmileRight]
-        
-        let sadEyeLeft = anchor.blendShapes[.mouthFrownLeft]
-        let sadEyeRight = anchor.blendShapes[.mouthFrownRight]
-        let sadBrowLeft = anchor.blendShapes[.browDownLeft]
-        let sadBrowRight = anchor.blendShapes[.browDownRight]
-        
-        let browR = anchor.blendShapes [.browOuterUpRight]
-        let browL = anchor.blendShapes [.browOuterUpLeft]
-    
-        
-        
+     
         self.analysis = ""
         
-        if let cheekPuffValue = cheekPuff?.decimalValue {
-            if cheekPuffValue > 1 {
-                self.analysis += "You're cheeks are puffed!"
+        switch emocoes[count] {
+        case "Alegria":
+            let smileLValue = self.getExpressionValue(with: .mouthSmileLeft, for: anchor) > 0.6
+            let smileRValue = self.getExpressionValue(with: .mouthSmileRight, for: anchor) > 0.6
+            if smileLValue && smileRValue {
+                self.analysis += "Você está alegre"
+                self.btnAction()
+            } else if !smileLValue || !smileRValue {
+                self.analysis += "Tente mexer os lábios"
             }
+            if smileLValue && smileRValue {
+                self.faceLabel.backgroundColor = UIColor.green
+            } else {
+                self.faceLabel.backgroundColor = UIColor.clear
+            }
+            
+        case "Tristeza":
+            let sadL = self.getExpressionValue(with: .mouthPressLeft, for: anchor) > 0.1
+            let sadR = self.getExpressionValue(with: .mouthPressRight, for: anchor) > 0.1
+            let browDownL = self.getExpressionValue(with: .browDownLeft, for: anchor) > 0.2
+            if browDownL && sadL && sadR {
+                self.analysis += "Você está triste"
+                self.btnAction()
+            } else if !sadL || !sadR  {
+                self.analysis += "Tente abaixar os lábios"
+            } else if !browDownL {
+                self.analysis += "Tente abaixar as sobrancelhas"
+            }
+            if browDownL && sadL && sadR {
+                self.faceLabel.backgroundColor = UIColor.green
+            } else {
+                self.faceLabel.backgroundColor = UIColor.clear
+            }
+
+        case "Raiva":
+            let eyeLOpen = self.getExpressionValue(with: .eyeWideLeft, for: anchor) > 0.3
+            let eyeROpen = self.getExpressionValue(with: .eyeWideRight, for: anchor) > 0.3
+            let browDownL = self.getExpressionValue(with: .browDownLeft, for: anchor) > 0.2
+            let browDownR = self.getExpressionValue(with: .browDownRight, for: anchor) > 0.2
+            if eyeLOpen && eyeROpen && browDownL && browDownR {
+                self.analysis += "Você está com raiva"
+                self.btnAction()
+            } else if !eyeLOpen || !eyeROpen {
+                self.analysis += "Tente abrir os olhos"
+            } else if !browDownL || !browDownR {
+                self.analysis += "Tente juntar as sobrancelhas"
+            }
+            if eyeLOpen && eyeROpen && browDownL && browDownR {
+                self.faceLabel.backgroundColor = UIColor.green
+            } else {
+                self.faceLabel.backgroundColor = UIColor.clear
+            }
+//
+//        case "Neutro":
+//            let eyeLOpen = self.getExpressionValue(with: .eyeWideLeft, for: anchor) > 0.2
+//            let eyeROpen = self.getExpressionValue(with: .eyeWideRight, for: anchor) > 0.2
+//            let mouthNormalL = self.getExpressionValue(with: .mouthStretchLeft, for: anchor) > 0.2
+//            let mouthNormalR = self.getExpressionValue(with: .mouthStretchRight, for: anchor) > 0.2
+//            if eyeLOpen && eyeROpen && mouthNormalL && mouthNormalR {
+//                self.analysis += "Você está relaxado"
+//                self.btnAction()
+//            } else if !eyeLOpen || !eyeROpen {
+//                self.analysis += "Tente abrir os olhos"
+//            } else if !mouthNormalL || !mouthNormalR {
+//                self.analysis += "Tente deixar os lábios retos"
+
+            
+            
+        default: break
         }
         
-        if let tongueValue = tongue?.decimalValue {
-            if tongueValue > 0.1 {
-                self.analysis += "Don't stick your tonge out!"
-            }
-        }
-        
-        if ((smileLeft?.decimalValue ?? 0.0) +
-                  (smileRight?.decimalValue ?? 0.0)) > 0.2 {
-                  self.analysis += "You are smiling"
-              }
-        
-        if let sadLValue = sadEyeLeft?.decimalValue, let sadRValue = sadEyeRight?.decimalValue, let sadBLValue = sadBrowLeft?.decimalValue, let sadRBValue = sadBrowRight?.decimalValue {
-            if sadLValue > 0.1 && sadRValue > 0.1 && sadBLValue > 0.05 && sadRBValue > 0.05 {
-                self.analysis += "You are sad :("
-            }
-        }
-        
-        if let browLValue = browL?.decimalValue, let browRValue = browR?.decimalValue {
-                        if browLValue > 0.3 && browRValue > 0.3 {
-                            self.analysis += "Surprise"
-                        }
-                }
-    
-        
-       
+
     }
+        
+
+    
+    
+    /// Pega valor de uma determinada expressão
+        func getExpressionValue(with expression: ARFaceAnchor.BlendShapeLocation, for anchor: ARFaceAnchor) -> Decimal {
+            let expression = anchor.blendShapes[expression]
+
+            if let value = expression?.decimalValue {
+                return value
+            }
+            return -1
+        }
+
+    
+    @objc func btnAction() {
+        if count < 2 {
+            count += 1
+            jujuEmot.image = UIImage(named: "\(emocoes[count]).png")
+        }
+        
+    }
+    
+    
+    
+
     
     
     // MARK: - Botão de Pause
