@@ -63,6 +63,7 @@ class ARViewController: UIViewController, ARSCNViewDelegate {
         NSLayoutConstraint.activate(howToPlayConstraints)
 //
 //        howToPlay.addTarget(self, action: #selector(howToView), for: .touchUpInside)
+        howToPlay.addTarget(self, action: #selector(handlePresentingVC(_:)), for: .touchUpInside)
 
         //butao
         
@@ -327,6 +328,12 @@ class ARViewController: UIViewController, ARSCNViewDelegate {
             pauseButton.isEnabled = true
         }
         
+    @objc func handlePresentingVC(_ sender: UIButton) {
+        if let vc = storyboard?.instantiateViewController(withIdentifier: "howToView") as? HowToViewController {
+            self.present(vc, animated: true, completion: nil)
+        }
+       
+     }
         
         @objc func backHome() {
             self.dismiss(animated: true)
