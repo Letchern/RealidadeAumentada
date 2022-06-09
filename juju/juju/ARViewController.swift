@@ -20,9 +20,10 @@ class ARViewController: UIViewController, ARSCNViewDelegate {
     var emocao: String = "Alegria"
     var count: Int = 0
     var emocoes: [String] = ["Alegria", "Raiva", "Tristeza"]
-    
+  
     // MARK: - Botão de Pause Declarando
     let pauseButton = UIButton(type: .system)
+    let howToPlay = UIButton(type: .system)
      let resumeButton = UIButton(type: .system)
      let homeButton = UIButton(type: .system)
     let pauseView = UIView(frame: .zero)
@@ -32,16 +33,42 @@ class ARViewController: UIViewController, ARSCNViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        faceLabel.layer.masksToBounds = true
+        faceLabel.layer.cornerRadius = 10
         
+        
+        labelEmocao.text = emocoes[0]
         // view.backgroundColor = UIColor.yellow
         // MARK: - Botão de Pause Sendo adicionado na View
         view.addSubview(pauseButton)
+        view.addSubview(howToPlay)
         view.addSubview(homeButton)
         
+        
+        // botão ?
+        let questionimg = UIImage(systemName: "questionmark")
+        howToPlay.backgroundColor = UIColor(red: 41/255, green: 104/255, blue: 182/255, alpha: 1)
+        howToPlay.setImage(questionimg, for: .normal)
+        howToPlay.layer.cornerRadius = 10
+        howToPlay.tintColor = .white
+        howToPlay.translatesAutoresizingMaskIntoConstraints = false
+        
+        
+        let howToPlayConstraints: [NSLayoutConstraint] = [
+            howToPlay.widthAnchor.constraint(equalToConstant: 50),
+            howToPlay.heightAnchor.constraint(equalToConstant: 50),
+            howToPlay.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 312),
+            howToPlay.topAnchor.constraint(equalTo: view.topAnchor, constant: 40)
+        ]
+        NSLayoutConstraint.activate(howToPlayConstraints)
+//
+//        howToPlay.addTarget(self, action: #selector(howToView), for: .touchUpInside)
+        howToPlay.addTarget(self, action: #selector(handlePresentingVC(_:)), for: .touchUpInside)
+
         //butao
         
         let pauseImage = UIImage(systemName: "pause")
-        pauseButton.backgroundColor = UIColor(hue: 0, saturation: 0, brightness: 0.5, alpha: 1)
+        pauseButton.backgroundColor = UIColor(red: 41/255, green: 104/255, blue: 182/255, alpha: 1)
         pauseButton.setImage(pauseImage, for: .normal)
         pauseButton.layer.cornerRadius = 10
         pauseButton.tintColor = .white
@@ -54,7 +81,7 @@ class ARViewController: UIViewController, ARSCNViewDelegate {
             pauseButton.widthAnchor.constraint(equalToConstant: 50),
             pauseButton.heightAnchor.constraint(equalToConstant: 50),
             pauseButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30),
-            pauseButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 100)
+            pauseButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 40)
         ]
         NSLayoutConstraint.activate(pauseButtonConstraints)
         
@@ -94,6 +121,7 @@ class ARViewController: UIViewController, ARSCNViewDelegate {
             let faceMeshGeometry = ARSCNFaceGeometry(device: device)
             let node = SCNNode(geometry: faceMeshGeometry)
             node.geometry?.firstMaterial?.fillMode = .lines
+            node.geometry?.firstMaterial?.transparency = 0.0
             
             return node
         } else {
@@ -210,7 +238,14 @@ class ARViewController: UIViewController, ARSCNViewDelegate {
         if count < 2 {
             count += 1
             jujuEmot.image = UIImage(named: "\(emocoes[count]).png")
+            labelEmocao.text = emocoes[count]
+            
+            
+          
         }
+        
+        let haptickFeedback = UINotificationFeedbackGenerator()
+        haptickFeedback.notificationOccurred(.error)
         
     }
     
@@ -236,7 +271,7 @@ class ARViewController: UIViewController, ARSCNViewDelegate {
             view.addSubview(pauseView)
             pauseView.addSubview(resumeButton)
             pauseView.addSubview(homeButton)
-            pauseView.backgroundColor = .yellow
+            pauseView.backgroundColor = .systemYellow
             pauseView.layer.cornerRadius = 20
             pauseView.translatesAutoresizingMaskIntoConstraints = false
             resumeButton.translatesAutoresizingMaskIntoConstraints = false
@@ -293,15 +328,15 @@ class ARViewController: UIViewController, ARSCNViewDelegate {
             pauseButton.isEnabled = true
         }
         
+    @objc func handlePresentingVC(_ sender: UIButton) {
+        if let vc = storyboard?.instantiateViewController(withIdentifier: "howToView") as? HowToViewController {
+            self.present(vc, animated: true, completion: nil)
+        }
+       
+     }
         
         @objc func backHome() {
-            func HowToPlayGame(_ sender: Any) {
-             //   if let vc = storyboard?.instantiateViewController(withIdentifier: "homeV") as? HomeViewController {
-             //       self.presentedViewController(vc, animated: true, completion: nil)
-                    
-                    print("oi")
-                    
-                }
+            self.dismiss(animated: true)
                 
             }
 
