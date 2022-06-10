@@ -19,7 +19,7 @@ class ARViewController: UIViewController, ARSCNViewDelegate {
     @IBOutlet weak var faceLabel: UILabel!
     var emocao: String = "Alegria"
     var count: Int = 0
-    var emocoes: [String] = ["Alegria", "Raiva", "Tristeza"]
+    var emocoes: [String] = ["Alegria","Surpresa","Raiva", "Tristeza","Medo","Nojo","Desprezo","Neutro",]
   
     // MARK: - Botão de Pause Declarando
     let pauseButton = UIButton(type: .system)
@@ -148,13 +148,13 @@ class ARViewController: UIViewController, ARSCNViewDelegate {
         
         switch emocoes[count] {
         case "Alegria":
-            let smileLValue = self.getExpressionValue(with: .mouthSmileLeft, for: anchor) > 0.6
-            let smileRValue = self.getExpressionValue(with: .mouthSmileRight, for: anchor) > 0.6
+            let smileLValue = self.getExpressionValue(with: .mouthSmileLeft, for: anchor) > 0.8
+            let smileRValue = self.getExpressionValue(with: .mouthSmileRight, for: anchor) > 0.8
             if smileLValue && smileRValue {
                 self.analysis += "Você está alegre"
                 self.btnAction()
             } else if !smileLValue || !smileRValue {
-                self.analysis += "Tente mexer os lábios"
+                self.analysis += "Mexa os lábios para cima"
             }
             if smileLValue && smileRValue {
                 self.faceLabel.backgroundColor = UIColor.green
@@ -163,16 +163,16 @@ class ARViewController: UIViewController, ARSCNViewDelegate {
             }
             
         case "Tristeza":
-            let sadL = self.getExpressionValue(with: .mouthPressLeft, for: anchor) > 0.1
-            let sadR = self.getExpressionValue(with: .mouthPressRight, for: anchor) > 0.1
-            let browDownL = self.getExpressionValue(with: .browDownLeft, for: anchor) > 0.2
+            let sadL = self.getExpressionValue(with: .mouthPressLeft, for: anchor) > 0.2
+            let sadR = self.getExpressionValue(with: .mouthPressRight, for: anchor) > 0.2
+            let browDownL = self.getExpressionValue(with: .browDownLeft, for: anchor) > 0.05
             if browDownL && sadL && sadR {
                 self.analysis += "Você está triste"
                 self.btnAction()
             } else if !sadL || !sadR  {
-                self.analysis += "Tente abaixar os lábios"
+                self.analysis += "Abaixe os lábios"
             } else if !browDownL {
-                self.analysis += "Tente abaixar as sobrancelhas"
+                self.analysis += "Abaixe as sobrancelhas"
             }
             if browDownL && sadL && sadR {
                 self.faceLabel.backgroundColor = UIColor.green
@@ -181,37 +181,83 @@ class ARViewController: UIViewController, ARSCNViewDelegate {
             }
 
         case "Raiva":
-            let eyeLOpen = self.getExpressionValue(with: .eyeWideLeft, for: anchor) > 0.3
-            let eyeROpen = self.getExpressionValue(with: .eyeWideRight, for: anchor) > 0.3
-            let browDownL = self.getExpressionValue(with: .browDownLeft, for: anchor) > 0.2
-            let browDownR = self.getExpressionValue(with: .browDownRight, for: anchor) > 0.2
+            let eyeLOpen = self.getExpressionValue(with: .eyeSquintLeft, for: anchor) > 0.3
+            let eyeROpen = self.getExpressionValue(with: .eyeSquintRight, for: anchor) > 0.3
+            let browDownL = self.getExpressionValue(with: .browDownLeft, for: anchor) > 0.1
+            let browDownR = self.getExpressionValue(with: .browDownRight, for: anchor) > 0.1
             if eyeLOpen && eyeROpen && browDownL && browDownR {
                 self.analysis += "Você está com raiva"
                 self.btnAction()
             } else if !eyeLOpen || !eyeROpen {
-                self.analysis += "Tente abrir os olhos"
+                self.analysis += "Feche um pouco os olhos"
             } else if !browDownL || !browDownR {
-                self.analysis += "Tente juntar as sobrancelhas"
+                self.analysis += "Junte as sobrancelhas"
             }
             if eyeLOpen && eyeROpen && browDownL && browDownR {
                 self.faceLabel.backgroundColor = UIColor.green
             } else {
                 self.faceLabel.backgroundColor = UIColor.clear
             }
-//
+            
+        case "Medo":
+            let bocaAberta = self.getExpressionValue(with: .mouthFunnel, for: anchor) > 0.2
+            let olhoaberto = self.getExpressionValue(with: .eyeWideLeft, for: anchor) > 0.4
+            if bocaAberta && olhoaberto {
+                self.analysis += "Você está com raiva"
+                self.btnAction()
+            } else if !bocaAberta {
+                self.analysis += "Abra um pouco boca"
+            } else if !olhoaberto {
+                self.analysis += "Abra os olhos"
+            }
+
 //        case "Neutro":
-//            let eyeLOpen = self.getExpressionValue(with: .eyeWideLeft, for: anchor) > 0.2
-//            let eyeROpen = self.getExpressionValue(with: .eyeWideRight, for: anchor) > 0.2
-//            let mouthNormalL = self.getExpressionValue(with: .mouthStretchLeft, for: anchor) > 0.2
-//            let mouthNormalR = self.getExpressionValue(with: .mouthStretchRight, for: anchor) > 0.2
-//            if eyeLOpen && eyeROpen && mouthNormalL && mouthNormalR {
+//            let olhoaber = self.getExpressionValue(with: .eyeWideLeft, for: anchor) > 0.3
+//            let mouthNormalL = self.getExpressionValue(with: .mouthStretchLeft, for: anchor) > 0.3
+//            if olhoaber && mouthNormalL {
 //                self.analysis += "Você está relaxado"
 //                self.btnAction()
-//            } else if !eyeLOpen || !eyeROpen {
-//                self.analysis += "Tente abrir os olhos"
-//            } else if !mouthNormalL || !mouthNormalR {
+//            } else if !olhoaber {
+//                self.analysis += "Tente relaxar os olhos"
+//            } else if !mouthNormalL {
 //                self.analysis += "Tente deixar os lábios retos"
 
+        case "Surpresa":
+            let bocaOpen =  self.getExpressionValue(with: .mouthFunnel, for: anchor) > 0.2
+            let olhoabe = self.getExpressionValue(with: .eyeWideLeft, for: anchor) > 0.4
+            let sobranCima = self.getExpressionValue(with: .browOuterUpLeft, for: anchor) > 0.2
+            if bocaOpen && olhoabe && sobranCima{
+                self.analysis += "Você está surpreso"
+                self.btnAction()
+            } else if !bocaOpen {
+                self.analysis += "Abra a boca"
+            } else if !olhoabe {
+                self.analysis += "Abra os olhos"
+            } else if !sobranCima {
+                self.analysis += "Levantar as sobrancelhas"
+            }
+
+        case "Desprezo":
+            let labioEsq = self.getExpressionValue(with: .mouthFunnel, for: anchor) > 0.02
+            let olhoA = self.getExpressionValue(with: .eyeWideLeft, for: anchor) > 0.2
+            if labioEsq && olhoA {
+                self.analysis += "Você sente desprezo"
+                self.btnAction()
+            } else if !labioEsq {
+                self.analysis += "Mexa os lábios para a esquerda"
+            }
+            
+        case "Nojo":
+            let olhofec = self.getExpressionValue(with: .eyeBlinkLeft, for: anchor) > 0.0
+            let boca = self.getExpressionValue(with: .mouthPucker, for: anchor) > 0.1
+            if olhofec && boca {
+                self.analysis += "Você está com nojo"
+                self.btnAction()
+            } else if !olhofec {
+                self.analysis += "Feche os olhos"
+            } else if !boca {
+                self.analysis += "Junte os lábios"
+            }
             
             
         default: break
@@ -235,7 +281,7 @@ class ARViewController: UIViewController, ARSCNViewDelegate {
 
     
     @objc func btnAction() {
-        if count < 2 {
+        if count < 6 {
             count += 1
             jujuEmot.image = UIImage(named: "\(emocoes[count]).png")
             labelEmocao.text = emocoes[count]
